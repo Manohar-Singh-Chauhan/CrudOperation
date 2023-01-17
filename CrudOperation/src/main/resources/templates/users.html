@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User List</title>
+    </head>
+    <style>
+    .add-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+
+    <body>
+        <h1>User List</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>phone</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.fname}"></td>
+                <td th:text="${user.lastname}"></td>
+                <td th:text="${phone}"></td>
+            </tr>
+        </table>
+        <div id="add-user-form" class="hidden">
+    <form th:action="@{/new-user}" th:object="${user}" method="post">
+        <label for="name">FirstName:</label>
+        <input type="text" id="name" th:field="*{name}"/><br>
+        <label for="email">lastName:</label>
+        <input type="email" id="email" th:field="*{email}"/><br>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+
+    </body>
+    <script>
+    function toggleForm() {
+        var form = document.getElementById("add-user-form");
+        if (form.classList.contains("hidden")) {
+            form.classList.remove("hidden");
+        } else {
+            form.classList.add("hidden");
+        }
+    }
+</script>
+
+</html>
